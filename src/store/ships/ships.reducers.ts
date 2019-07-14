@@ -38,8 +38,7 @@ export const shipsReducer = (state = defaultState, action: ShipsActions): ShipsS
     return {
       ...state,
       turn: state.turn + 1,
-      shots: [...state.shots, action.payload as number],
-      // as number will not be needed when create react app will use typescript 3.5
+      shots: [...state.shots, action.payload],
     }
   }
 
