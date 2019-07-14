@@ -11,7 +11,7 @@ export interface RootStore {
 }
 
 const rootReducer = combineReducers({
-  shot: shipsReducer,
+  ships: shipsReducer,
 });
 
 const epicMiddleware = createEpicMiddleware<ShipsActions, ShipsActions, RootStore> ();
@@ -19,7 +19,6 @@ const epicMiddleware = createEpicMiddleware<ShipsActions, ShipsActions, RootStor
 const rootEpic = combineEpics(
   ...shipsEpics,
 );
-
 
 export const rootStore = createStore(
   rootReducer,

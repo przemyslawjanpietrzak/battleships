@@ -1,7 +1,7 @@
-import { ShipsActions, ShipsActionTypes, shot } from './ships.actions';
-import { stat } from "fs";
-import { getRandomNumbersFromRange } from '../../utils';
-import { MAP_SIZE, SHIPS_COUNT } from '../../settings';
+import { getRandomNumbersFromRange } from 'utils';
+import { MAP_SIZE, SHIPS_COUNT } from 'settings';
+
+import { ShipsActions, ShipsActionTypes } from './ships.actions';
 
 export interface ShipsState {
   turn: number;
@@ -23,7 +23,9 @@ export const shipsReducer = (state = defaultState, action: ShipsActions): ShipsS
   if (action.type === ShipsActionTypes.INIT_GAME) {
     return {
       ...state,
-      shipsPositions: getRandomNumbersFromRange(SHIPS_COUNT, MAP_SIZE ** 2)
+      gameEnded: false,
+      turn: 1,
+      shipsPositions: getRandomNumbersFromRange(SHIPS_COUNT, MAP_SIZE ** 2),
     }
   }
 

@@ -1,5 +1,7 @@
 import React from 'react';
-import './App.css';
+
+import Map from './components/map/map.container';
+import Menu from './components/menu/menu.container';
 
 const App: React.FC = () => {
   return (
@@ -16,6 +18,8 @@ const App: React.FC = () => {
         >
           Learn React
         </a>
+        <Menu />
+        <Map />
       </header>
     </div>
   );

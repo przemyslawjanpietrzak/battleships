@@ -1,9 +1,10 @@
-import { map } from 'rxjs/operators';
+import { map, mapTo, filter } from 'rxjs/operators';
 
 import { ofType, Epic } from 'redux-observable';
 
-import { ShipsActions, ShipsActionTypes, mis, shot } from './ships.actions';
+import { ShipsActions, ShipsActionTypes, mis, shot, finishGame } from './ships.actions';
 import { RootStore } from '../index';
+import { selectUserWon } from './ships.selectors';
 
 export const userMoveEpic: Epic<ShipsActions, ShipsActions, RootStore> = (
   action$,
@@ -19,6 +20,17 @@ export const userMoveEpic: Epic<ShipsActions, ShipsActions, RootStore> = (
   })
 );
 
+export const userWonEpic: Epic<ShipsActions, ShipsActions, RootStore> = (
+  action$,
+  state$,
+) => action$.pipe(
+  ofType(ShipsActionTypes.SHOT),
+  filter(() => selectUserWon(state$.value)),
+  mapTo(finishGame()),
+);
+
+
 export const shipsEpics = [
   userMoveEpic,
+  userWonEpic,
 ];
